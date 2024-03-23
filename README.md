@@ -19,3 +19,14 @@ pip install -r requierments.txt
 ```
 cp utils/.env_example utils/.env
 ```
+
+
+##### list of LLMs available
+
+- mistral/mistral-tiny-latest
+- mistral/mistral-small-latest
+- mistral/mistral-medium-latest
+- mistral/mistral-large-latest
+- groq/llama2-70b-4096
+- groq/mixtral-8x7b-32768
+- groq/gemma-7b-it
