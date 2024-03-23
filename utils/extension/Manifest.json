@@ -1,0 +1,9 @@
+{
+  "manifest_version": 2,
+  "name": "Text Processor",
+  "version": "1.0",
+  "permissions": ["contextMenus"],
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
