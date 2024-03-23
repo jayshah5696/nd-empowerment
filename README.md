@@ -14,3 +14,8 @@ conda create -n nd python=3.11 -y
 ```
 pip install -r requierments.txt
 ```
+
+### Copy .env_example as .env and fill the values
+```
+cp utils/.env_example utils/.env
+```
