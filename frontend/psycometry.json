@@ -1,0 +1,137 @@
+[
+    {
+       "question":"What is your favorite outdoor activity?",
+       "question_type":"like",
+       "option_list":[
+          {
+             "Image":"hiking.jpg",
+             "Text_input":"Hiking in the mountains"
+          },
+          {
+             "Image":"swimming.jpg",
+             "Text_input":"Swimming in the ocean"
+          },
+          {
+             "Image":"camping.jpg",
+             "Text_input":"Camping under the stars"
+          },
+          {
+             "Image":"cycling.jpg",
+             "Text_input":"Cycling through scenic routes"
+          },
+          {
+             "Image":"gardening.jpg",
+             "Text_input":"Gardening and growing plants"
+          }
+       ],
+       "done":false
+    },
+    {
+       "question":"Which type of music do you enjoy the most?",
+       "question_type":"like",
+       "option_list":[
+          {
+             "Image":"classical.jpg",
+             "Text_input":"Classical music"
+          },
+          {
+             "Image":"rock.jpg",
+             "Text_input":"Rock and roll"
+          },
+          {
+             "Image":"jazz.jpg",
+             "Text_input":"Jazz and blues"
+          },
+          {
+             "Image":"pop.jpg",
+             "Text_input":"Pop music"
+          },
+          {
+             "Image":"electronic.jpg",
+             "Text_input":"Electronic dance music"
+          }
+       ],
+       "done":false
+    },
+    {
+       "question":"What is your preferred way to relax?",
+       "question_type":"like",
+       "option_list":[
+          {
+             "Image":"reading.jpg",
+             "Text_input":"Reading a book"
+          },
+          {
+             "Image":"meditation.jpg",
+             "Text_input":"Practicing meditation"
+          },
+          {
+             "Image":"yoga.jpg",
+             "Text_input":"Doing yoga exercises"
+          },
+          {
+             "Image":"bath.jpg",
+             "Text_input":"Taking a warm bath"
+          },
+          {
+             "Image":"walk.jpg",
+             "Text_input":"Going for a walk in nature"
+          }
+       ],
+       "done":false
+    },
+    {
+       "question":"Which type of cuisine do you enjoy the most?",
+       "question_type":"like",
+       "option_list":[
+          {
+             "Image":"italian.jpg",
+             "Text_input":"Italian cuisine"
+          },
+          {
+             "Image":"chinese.jpg",
+             "Text_input":"Chinese cuisine"
+          },
+          {
+             "Image":"mexican.jpg",
+             "Text_input":"Mexican cuisine"
+          },
+          {
+             "Image":"indian.jpg",
+             "Text_input":"Indian cuisine"
+          },
+          {
+             "Image":"japanese.jpg",
+             "Text_input":"Japanese cuisine"
+          }
+       ],
+       "done":false
+    },
+    {
+       "question":"What is your favorite type of movie?",
+       "question_type":"like",
+       "option_list":[
+          {
+             "Image":"action.jpg",
+             "Text_input":"Action and adventure"
+          },
+          {
+             "Image":"comedy.jpg",
+             "Text_input":"Comedy and humor"
+          },
+          {
+             "Image":"drama.jpg",
+             "Text_input":"Drama and emotional stories"
+          },
+          {
+             "Image":"scifi.jpg",
+             "Text_input":"Science fiction and fantasy"
+          },
+          {
+             "Image":"documentary.jpg",
+             "Text_input":"Documentaries and real-life stories"
+          }
+       ],
+       "done":false
+    }
+ ]

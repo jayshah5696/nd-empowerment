@@ -2,22 +2,75 @@ import os
 from PIL import Image
 import streamlit as st
 import requests
+import json
+
+
+# initialize the psychometry_output.json file with empty list
+with open('psychometry_output.json', 'w') as f:
+    json.dump([], f)
 
 # Function to make POST request to Flask API
 def post_question_api(data):
     url = "http://localhost:5000/api/question"  # Change URL accordingly
     # response = requests.post(url, json=data)
     # return response.json()
-    data = {
-            "question":  "what do you like",
-            "question_type": "like",
-            "option_list": [
-                            {"Image": "sample1.jpg", "Text_input": "sample1"},
-                            {"Image": "sample2.jpg", "Text_input": "sample2"}
-                            ],
-            "done": False
-        }
-    return data
+    # read the json file
+    # write the data to an existing json file in the backend
+# read the data from an existing json file in the backend
+    
+    with open('psychometry_output.json') as f:
+        #try:
+        updated_data = json.load(f)
+        # except json.JSONDecodeError:  # If the file is empty, set updated_data as an empty list
+        #     updated_data = []
+
+    # append the new data to the existing data
+    updated_data.append(data)  # make sure 'data' is a dictionary
+
+    # write the updated data back to the json file
+    with open('psychometry_output.json', 'w') as f:
+        json.dump(updated_data, f)
+
+    # read the data from another json file
+    with open('psycometry.json') as f:
+        new_data = json.load(f)
+    # print(updated_data)
+    # print(new_data)
+    if len(updated_data)>1:
+        updated_data_questions = []
+
+        # Loop through the 'Like' list
+        for item in updated_data:
+            # Append each question to the list
+            item_like = item.get('Like', [])
+            if len(item_like) > 0:
+                for q_ in item_like:
+                    updated_data_questions.append(q_['Question'])
+    else:
+        updated_data_questions = []
+    print(updated_data_questions)
+    done= True
+    for key in new_data:
+        print(key)
+        if key['question'] not in updated_data_questions:
+            done = False
+            return_data = key
+            st.session_state["question_data"] = return_data
+            break
+    if done:
+        data['done'] = True
+        return_data = data
+        st.session_state["question_data"] = return_data
+    # data = {
+    #         "question":  "what do you like",
+    #         "question_type": "like",
+    #         "option_list": [
+    #                         {"Image": "sample1.jpg", "Text_input": "sample1"},
+    #                         {"Image": "sample2.jpg", "Text_input": "sample2"}
+    #                         ],
+    #         "done": False
+    #     }
+    return return_data
 
 # Main Streamlit app
 def main():
@@ -68,17 +121,17 @@ def main():
         
         if done:
             col1, col2 = st.columns([3, 1])
-            with col1:
-                # Render "Done" button aligned to the right
-                st.write("")  # Placeholder to maintain alignment
-            with col2:
+            # with col1:
+            #     # Render "Done" button aligned to the right
+            #     st.write("")  # Placeholder to maintain alignment
+            #with col2:
                 # Button to call another API
-                if st.button("Done", key="done_button"):
+            if st.button("Done", key="done_button"):
                     # Call another API here
-                    render_welcome_page()
+                render_welcome_page()
 
     # Define the folder path where images are located
-    image_folder = "frontend\\images"
+    image_folder = "images"
 
     # Render appropriate page based on input data
     data = st.session_state.get("question_data")
