@@ -4,9 +4,9 @@ import ast
 from llm import completion_llm
 from prompt import system_prompt_initial as prompt
 
-if __name__ == "__main__":
+def generate_style_guide(location):
     # Load the JSON data
-    with open('../../frontend/psychometry_output.json') as f:
+    with open(location) as f:
         data = json.load(f)
 
     # Initialize an empty list to hold the question-answer pairs
@@ -39,3 +39,5 @@ if __name__ == "__main__":
 
     print("Style guide generated successfully!")
 
+# # Example usage
+# generate_style_guide('/Users/jshah/Documents/GitHub/nd-empowerment/frontend/psychometry_output.json')

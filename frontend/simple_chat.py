@@ -1,7 +1,14 @@
 import streamlit as st
+from litellm import completion
+import dotenv
+dotenv.load_dotenv('../utils/.env')
 
 
 # client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+def completion_llm(text,model='mistral/mistral-small-latest'):
+    messages = [{ "content": text,"role": "user"}]
+    response = completion(model=model, messages=messages)
+    return response.choices[0].message.content
 
 def simple_chat(mock_response=None):
 

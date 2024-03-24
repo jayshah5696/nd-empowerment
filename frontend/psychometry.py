@@ -9,6 +9,12 @@ import json
 # with open('psychometry_output.json', 'w') as f:
 #     json.dump([], f)
 
+# psycometry_output = 'C:\\Apps\\nd-empowerment\\frontend\\psychometry_output.json'
+psycometry_output = "psychometry_output.json"
+# psycometry_input = 'C:\\Apps\\nd-empowerment\\frontend\\psycometry.json'
+psycometry_input = "psycometry.json"
+# image_folder = "C:\\Apps\\nd-empowerment\\frontend\\images"
+image_folder = "images"
 # Function to make POST request to Flask API
 def post_question_api(data):
     url = "http://localhost:5000/api/question"  # Change URL accordingly
@@ -18,7 +24,7 @@ def post_question_api(data):
     # write the data to an existing json file in the backend
 # read the data from an existing json file in the backend
     
-    with open('C:\\Apps\\nd-empowerment\\frontend\\psychometry_output.json') as f:
+    with open(psycometry_output ) as f:
         #try:
         updated_data = json.load(f)
         # except json.JSONDecodeError:  # If the file is empty, set updated_data as an empty list
@@ -28,11 +34,11 @@ def post_question_api(data):
     updated_data.append(data)  # make sure 'data' is a dictionary
 
     # write the updated data back to the json file
-    with open('C:\\Apps\\nd-empowerment\\frontend\\psychometry_output.json', 'w') as f:
+    with open(psycometry_output , 'w') as f:
         json.dump(updated_data, f)
 
     # read the data from another json file
-    with open('C:\\Apps\\nd-empowerment\\frontend\\psycometry.json') as f:
+    with open(psycometry_input) as f:
         new_data = json.load(f)
     # print(updated_data)
     # print(new_data)
@@ -131,7 +137,7 @@ def psychometry_page():
                 render_welcome_page()
 
     # Define the folder path where images are located
-    image_folder = "C:\\Apps\\nd-empowerment\\frontend\\images"
+    
 
     # Render appropriate page based on input data
     data = st.session_state.get("question_data")
