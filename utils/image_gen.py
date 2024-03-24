@@ -7,7 +7,7 @@ import uuid
 import io
 dotenv.load_dotenv('.env')
 firworks_api_key = os.getenv("FIREWORKS_API_KEY")
-def generate_image(prompt):
+def generate_image(prompt, get_b64=False):
     url = "https://api.fireworks.ai/inference/v1/image_generation/accounts/fireworks/models/stable-diffusion-xl-1024-v1-0"
 
     payload = {
@@ -39,7 +39,10 @@ def generate_image(prompt):
     uuid_value = uuid.uuid4()
     filename = f"{uuid_value}.png"
     image.save(filename)
-    return filename
+    if get_b64:
+        return filename, base64_image
+    else:
+        return filename
 
 # Usage
 # response = generate_image("hill with greenary")
