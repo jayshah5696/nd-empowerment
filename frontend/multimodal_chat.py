@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
 from pathlib import Path
-
+import csv
 # client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 def img_to_bytes(img_path):
@@ -21,7 +21,26 @@ def text_to_speech(text):
     # For demonstration, let's just return a sa
     return "path/to/generated/audio/file.mp3"
 
+def csv_to_dict(csv_file):
+    with open(csv_file, 'r') as file:
+        reader = csv.DictReader(file)
+        result = {row['Text Input']: row['Location'] for row in reader}
+    return result
+
+
+
 def multimodal_chat():
+    dict_items = csv_to_dict("journal_entries.csv")
+    # filter the dict items if values are not empty
+    dict_items = {k: v for k, v in dict_items.items() if v}
+
+    options = dict_items.keys()
+    selected_option = st.selectbox("Select a journal entry", options)
+    with open(dict_items[selected_option], "r") as file:
+        markdown_content = file.read()
+        response = markdown_content
+    st.markdown(markdown_content, unsafe_allow_html=True)
+    
 
     if "openai_model" not in st.session_state:
         st.session_state["openai_model"] = "gpt-3.5-turbo"
@@ -46,24 +65,14 @@ def multimodal_chat():
             # Mock text plus image response
 
             # Path to your local image file
-            local_img_path = "C:\\Apps\\nd-empowerment\\frontend\\images\\sample2.jpg"
+            # local_img_path = "C:\\Apps\\nd-empowerment\\frontend\\images\\sample2.jpg"
+            # local_img_path = "images/sample1.jpg"
 
-            # Convert the local image to base64
-            encoded_img = img_to_bytes(local_img_path)
+            # # Convert the local image to base64
+            # encoded_img = img_to_bytes(local_img_path)
 
-            # Create the HTML string with the base64-encoded image
-            html = f'<p>Hi mr lion king</p><img src="data:image/png;base64,{encoded_img}" alt="Local Image">'
-            st.markdown(html, unsafe_allow_html=True)
-            response = html
+            # # Create the HTML string with the base64-encoded image
+            # html = f'<p>Hi mr lion king</p><img src="data:image/png;base64,{encoded_img}" alt="Local Image">'
+            response = "Hi"
 
-            # else:
-            #     stream = client.chat.completions.create(
-            #         model=st.session_state["openai_model"],
-            #         messages=[
-            #             {"role": m["role"], "content": m["content"]}
-            #             for m in st.session_state.messages
-            #         ],
-            #         stream=True,
-            #     )
-            #     response = st.write_stream(stream)
             st.session_state.messages.append({"role": "assistant", "content": response})

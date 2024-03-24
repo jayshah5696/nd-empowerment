@@ -6,12 +6,12 @@ from simple_chat import simple_chat
 from multimodal_chat import multimodal_chat
 from journal import journal_app
 
-with open("C:\\Apps\\nd-empowerment\\utils\\style_guide.json", "r") as file:
+with open("style_guide.json", "r") as file:
     json_data = json.load(file)
 
 def main():
-    st.sidebar.title('Navigation')
-    page = st.sidebar.radio("Go to", ['Psychometry', 'Chat', "Multimodal Chat", "Journal"])
+    st.sidebar.title('NeuroBuddy')
+    page = st.sidebar.radio("Go to", ['Psychometry', "Journal", 'Chat', "Multimodal Chat"])
 
     if page == 'Psychometry':
         psychometry_page()
