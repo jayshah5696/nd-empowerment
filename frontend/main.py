@@ -6,8 +6,8 @@ import json
 
 
 # initialize the psychometry_output.json file with empty list
-with open('psychometry_output.json', 'w') as f:
-    json.dump([], f)
+# with open('psychometry_output.json', 'w') as f:
+#     json.dump([], f)
 
 # Function to make POST request to Flask API
 def post_question_api(data):
