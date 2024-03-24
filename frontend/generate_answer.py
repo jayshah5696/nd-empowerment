@@ -8,8 +8,8 @@ from langchain_mistralai.chat_models import ChatMistralAI
 from utils.prompt import persona_to_style_prompt, style_to_answer_prompt, split_answer_to_visual_prompt
 from utils import image_gen
 
-dotenv.load_dotenv('utils/.env')
-style_guide_file_path = 'utils/style_guide.json'
+dotenv.load_dotenv('../utils/.env')
+style_guide_file_path = '../utils/style_guide.json'
 
 
 def predict_style_using_intro(introductory_text, style_guide):
@@ -57,7 +57,7 @@ def generate_markdown_using_style(question, style):
         # from IPython.display import Image, display
         # image_bytes = base64.b64decode(base64_image)
         # display(Image(image_bytes))
-        main_markdown_string += f"""<p>{current_prompt}</p><img src="data:image/png;base64,{base64_image}" alt="{current_prompt}">"""     
+        main_markdown_string += f"""<p>{current_prompt}</p><img src="data:image/png;base64,{base64_image}" alt="{current_prompt}" width="300" height="300">"""
 
     # writing string to Markdown file
     uuid_value = uuid.uuid4()

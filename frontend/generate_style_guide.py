@@ -1,8 +1,9 @@
 import json
 from rich.pretty import pprint
 import ast
-from llm import completion_llm
 from prompt import system_prompt_initial as prompt
+from journal import completion_llm
+
 
 def generate_style_guide(location):
     # Load the JSON data

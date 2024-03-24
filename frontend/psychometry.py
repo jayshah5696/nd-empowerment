@@ -3,7 +3,7 @@ from PIL import Image
 import streamlit as st
 import requests
 import json
-
+from generate_style_guide import generate_style_guide
 
 # initialize the psychometry_output.json file with empty list
 # with open('psychometry_output.json', 'w') as f:
@@ -106,6 +106,9 @@ def psychometry_page():
     def render_welcome_page():
         st.title("Welcome to Our App")
         st.write("Welcome to our app! We're glad to have you here.")
+        # run the style guide function
+        generate_style_guide(psycometry_output)
+        st.write("Your preference is set")
 
     # Function to handle questionnaire form
     def handle_questionnaire(question_data, image_folder):
