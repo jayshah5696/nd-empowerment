@@ -26,21 +26,9 @@ def generateImage(user_input):
 # Endpoint for explaining text
 @app.route('/explain', methods=['POST'])
 def explain():
-    data = request.form
     # Perform the necessary operations based on the received data
-    return 'Explanation generated'
-
-# Endpoint for visualizing text
-@app.route('/visualize', methods=['POST'])
-def visualize():
-    print('Received input:', request.json)
-    text = request.json.get('text', '')
-    path = generateImage(text)
-    return "file://" + path
-
-# Endpoint for reading text
-@app.route('/read', methods=['POST'])
-def read():
+    # Access the environment variables
+    tts_api = os.getenv('tts_id')
     data = request.form
     print('Called READ, sending to Synthesize output')
     input_data = SynthesizeInput(lang='en', text=data['text'])
@@ -50,8 +38,16 @@ def read():
     # Perform the necessary operations based on the received data
     return result.result
 
-# Access the environment variables
-tts_api = os.getenv('tts_id')
+
+# Endpoint for visualizing text
+@app.route('/visualize', methods=['POST'])
+def visualize():
+    print('Received input:', request.json)
+    text = request.json.get('text', '')
+    path = generateImage(text)
+    return "file://" + path
+
+#############
 
 # Define input and output models
 class SynthesizeInput(BaseModel):
