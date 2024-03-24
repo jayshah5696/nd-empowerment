@@ -5,8 +5,8 @@ import base64
 import uuid
 from langchain_core.messages import HumanMessage
 from langchain_mistralai.chat_models import ChatMistralAI
-from utils.prompt import persona_to_style_prompt, style_to_answer_prompt, split_answer_to_visual_prompt
-from utils import image_gen
+from prompt import persona_to_style_prompt, style_to_answer_prompt, split_answer_to_visual_prompt
+import image_gen
 
 dotenv.load_dotenv('../utils/.env')
 style_guide_file_path = '../utils/style_guide.json'
@@ -61,45 +61,45 @@ def generate_markdown_using_style(question, style):
 
     # writing string to Markdown file
     uuid_value = uuid.uuid4()
-    md_filename = f"{uuid_value}.md"
+    md_filename = f"output/{uuid_value}.md"
     # Write the Markdown string to the file
     with open(md_filename, "w") as file:
         file.write(main_markdown_string)
     return md_filename
 
-### PART 1
-user_intro = "i am a 60 years old man, i want to travel the world and explore hidden gems"
-with open(style_guide_file_path, 'r') as file:
-    style_guide = json.load(file)
-# print(f"style_guide = {style_guide}")
-# result_style = predict_style_using_intro(introductory_text=user_intro, 
-#                                          style_guide=style_guide)
-# print(f"result_style = {result_style}")
+# ### PART 1
+# user_intro = "i am a 60 years old man, i want to travel the world and explore hidden gems"
+# with open(style_guide_file_path, 'r') as file:
+#     style_guide = json.load(file)
+# # print(f"style_guide = {style_guide}")
+# # result_style = predict_style_using_intro(introductory_text=user_intro, 
+# #                                          style_guide=style_guide)
+# # print(f"result_style = {result_style}")
 
-### PART 2
-user_question = "tell me about french food"
-current_style = {
-    "answer_type": "story",
-    "answer_style": "inspirational",
-    "negative_type": "none",
-}
-# result_answer = generate_answer_using_style(question=user_question, 
-#                                             style=current_style)
-# print(f"result_answer = {result_answer}")
-
-### PART 3
+# ### PART 2
 # user_question = "tell me about french food"
 # current_style = {
 #     "answer_type": "story",
 #     "answer_style": "inspirational",
 #     "negative_type": "none",
 # }
-user_question = "tell me about california"
-current_style = {
-    "answer_type": "poem",
-    "answer_style": "analytical",
-    "negative_type": "none",
-}
-result_filename = generate_markdown_using_style(question=user_question,
-                                                style=current_style)
-print(f"result_filename = {result_filename}")
+# # result_answer = generate_answer_using_style(question=user_question, 
+# #                                             style=current_style)
+# # print(f"result_answer = {result_answer}")
+
+# ### PART 3
+# # user_question = "tell me about french food"
+# # current_style = {
+# #     "answer_type": "story",
+# #     "answer_style": "inspirational",
+# #     "negative_type": "none",
+# # }
+# user_question = "tell me about california"
+# current_style = {
+#     "answer_type": "poem",
+#     "answer_style": "analytical",
+#     "negative_type": "none",
+# }
+# result_filename = generate_markdown_using_style(question=user_question,
+#                                                 style=current_style)
+# print(f"result_filename = {result_filename}")
