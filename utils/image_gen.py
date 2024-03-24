@@ -5,9 +5,13 @@ import base64
 from PIL import Image
 import uuid
 import io
-dotenv.load_dotenv('.env')
+# dotenv.load_dotenv('.env')
+# as caller was coming from one layer back it overrides the CWD
+dotenv.load_dotenv('utils/.env')
 firworks_api_key = os.getenv("FIREWORKS_API_KEY")
+
 def generate_image(prompt, get_b64=False):
+    # print(f"starting generate_image from - {os.getcwd()}")
     url = "https://api.fireworks.ai/inference/v1/image_generation/accounts/fireworks/models/stable-diffusion-xl-1024-v1-0"
 
     payload = {
@@ -32,6 +36,7 @@ def generate_image(prompt, get_b64=False):
     }
 
     response = requests.post(url, json=payload, headers=headers)
+    # print(f"generate_image response = {response}")
     base64_image = response.json()[0]['base64']
     image_bytes = base64.b64decode(base64_image)
     image = Image.open(io.BytesIO(image_bytes))

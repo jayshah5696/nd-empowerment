@@ -128,6 +128,15 @@ Style : Frame your answer using the following style guide {style}.
 Answer :
 """
 
+split_answer_to_visual_prompt = r"""
+You are a helpful visual assistant. 
+Your task is to create an array of text prompts which can be used to generate images using the given text.
+Keep your answer limited to 3 prompts maximum.
+Format your answer as [prompt1, prompt2, prompt3]
 
+Text : {user_text}.
+
+Answer : 
+"""
 
 
