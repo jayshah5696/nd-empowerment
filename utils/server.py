@@ -6,6 +6,7 @@ from pathlib import PosixPath
 import bentoml
 import dotenv
 import json
+from image_gen import generate_image
 
 # Load the .env file
 dotenv.load_dotenv('.env')
@@ -17,8 +18,10 @@ CORS(app, resources={r"/*": {"origins": "*"}})  # Allow requests from all origin
 def generateImage(user_input):
     # This function will be responsible for generating the image
     # For now, it does nothing
-    print(user_input)
-    pass
+    resp = generate_image(user_input)
+    path = os.getcwd() + "/" + resp
+    print(path)
+    return path
 
 # Endpoint for explaining text
 @app.route('/explain', methods=['POST'])
@@ -32,9 +35,8 @@ def explain():
 def visualize():
     print('Received input:', request.json)
     text = request.json.get('text', '')
-    generateImage(text)
-    # Return the image URL
-    return "file:///Users/aghatage/Documents/code/nde/logo.png"
+    path = generateImage(text)
+    return "file://" + path
 
 # Endpoint for reading text
 @app.route('/read', methods=['POST'])
