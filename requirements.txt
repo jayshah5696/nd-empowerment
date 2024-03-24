@@ -2,3 +2,4 @@ litellm
 bentoml
 streamlit==0.89.0
 requests==2.26.0
+pillow
