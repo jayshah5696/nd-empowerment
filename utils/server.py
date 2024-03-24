@@ -1,56 +1,57 @@
-from flask import Flask, render_template, request
+from flask import Flask, request
 from flask_cors import CORS
-import dotenv
 import os
 from pydantic import BaseModel, validator
 from pathlib import PosixPath
 import bentoml
-# load dot env file
+import dotenv
+import json
+
 # Load the .env file
 dotenv.load_dotenv('.env')
 
-
 app = Flask(__name__)
-CORS(app)  # Enable CORS for the entire application
+CORS(app, resources={r"/*": {"origins": "*"}})  # Allow requests from all origins
 
-def generateImage():
+# Function to generate image (placeholder)
+def generateImage(user_input):
     # This function will be responsible for generating the image
     # For now, it does nothing
+    print(user_input)
     pass
 
-@app.route('/explain', methods=['GET', 'POST'])
+# Endpoint for explaining text
+@app.route('/explain', methods=['POST'])
 def explain():
-    if request.method == 'POST':
-        # Handle the POST request for the 'explain' endpoint
-        data = request.form
-        # Perform the necessary operations based on the received data
-        return 'Explanation generated'
-    return render_template('explain.html')
+    data = request.form
+    # Perform the necessary operations based on the received data
+    return 'Explanation generated'
 
-@app.route('/visualize', methods=['GET', 'POST'])
+# Endpoint for visualizing text
+@app.route('/visualize', methods=['POST'])
 def visualize():
-    if request.method == 'POST':
-        # Handle the POST request for the 'visualize' endpoint
-        data = request.form
-        # Call the generateImage function
-        generateImage()
-        # Return the string representing the image path
-        return "/Users/aghatage/Documents/code/nde/logo.png"
-    return render_template('visualize.html')
+    print('Received input:', request.json)
+    text = request.json.get('text', '')
+    generateImage(text)
+    # Return the image URL
+    return "file:///Users/aghatage/Documents/code/nde/logo.png"
 
-@app.route('/read', methods=['GET', 'POST'])
+# Endpoint for reading text
+@app.route('/read', methods=['POST'])
 def read():
-    if request.method == 'POST':
-        # Handle the POST request for the 'read' endpoint
-        data = request.form
-        # Perform the necessary operations based on the received data
-        return 'Reading performed'
-    return render_template('read.html')
+    data = request.form
+    print('Called READ, sending to Synthesize output')
+    input_data = SynthesizeInput(lang='en', text=data['text'])
+    print('Got Synthesize output')
+    result = synthesize_text(input_data)
+    print('Synthesize output: ' + result.result)
+    # Perform the necessary operations based on the received data
+    return result.result
 
 # Access the environment variables
 tts_api = os.getenv('tts_id')
 
-
+# Define input and output models
 class SynthesizeInput(BaseModel):
     lang: str
     text: str
@@ -62,6 +63,7 @@ class SynthesizeOutput(BaseModel):
     def convert_to_posixpath(cls, v):
         return PosixPath(v)
 
+# Function to synthesize text using TTS API
 def synthesize_text(input_data: SynthesizeInput) -> SynthesizeOutput:
     with bentoml.SyncHTTPClient(tts_api) as client:
         result = client.synthesize(
@@ -72,3 +74,4 @@ def synthesize_text(input_data: SynthesizeInput) -> SynthesizeOutput:
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8000)
+
