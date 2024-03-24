@@ -11,6 +11,10 @@ import bentoml
 from pydantic import BaseModel
 from pathlib import Path
 from audiorecorder import audiorecorder
+from generate_answer import generate_markdown_using_style
+style_guide_file_path = 'style_guide.json'
+with open(style_guide_file_path, 'r') as file:
+    style_guide = json.load(file)
 # Access the environment variables
 stt_api = os.getenv('stt_id')
 
@@ -114,6 +118,24 @@ def journal_app():
         st.subheader("Journal Entries")
         journal_df = pd.read_csv('journal_entries.csv')
         st.dataframe(journal_df)
+
+    if st.button("Clear Journal Entries"):
+        journal_df = pd.DataFrame(columns=['Timestamp', 'Text Input', 'Response Needed', 'Completed'])
+        journal_df.to_csv('journal_entries.csv', index=False)
+        st.success("Journal entries cleared successfully!")
+    if st.button("Execute on Journal Entries"):
+        journal_df = pd.read_csv('journal_entries.csv')
+        for index, row in journal_df.iterrows():
+            if row['Completed'] == False:
+                if row['Response Needed'] == True and row['Text Input'] is not None:
+                    location = generate_markdown_using_style(row['Text Input'], style_guide)
+                    # st.markdown(response)
+                    journal_df.loc[index, 'Completed'] = True
+                    # add markdown location
+                    journal_df.loc[index, 'Location'] = location
+
+        journal_df.to_csv('journal_entries.csv', index=False)
+        st.success("Journal entries executed successfully!")
 
     # audio = mic_recorder(start_prompt="⏺️", stop_prompt="⏹️", key='recorder')
     
