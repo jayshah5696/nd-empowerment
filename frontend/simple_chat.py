@@ -10,6 +10,14 @@ def completion_llm(text,model='mistral/mistral-small-latest'):
     response = completion(model=model, messages=messages)
     return response.choices[0].message.content
 
+def chat_llm(input, model='mistral/mistral-small-latest'):
+    messages = [{ "content": input,"role": "user"}]
+    response = completion(model=model, messages=messages)
+    # append response as a new message with role 'assistant'
+    messages.append({ "content": response.choices[0].message.content, "role": "assistant"})
+    return messages
+
+
 def simple_chat(mock_response=None):
 
     if "openai_model" not in st.session_state:
