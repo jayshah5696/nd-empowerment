@@ -101,3 +101,33 @@ Keep the conversation formal and concise, with each exchange being no more than 
 Ask a single follow-up question to get to know the user better. 
 End the question-answer session after a maximum of 5 turns of conversation.
 """
+
+persona_to_style_prompt = r"""
+You are a helpful assistant that answers in JSON.
+Your task is to understand the user text below and create a JSON answer using style guide mentioned below.
+Refrain from adding any external information and abide to the Style Guide and its structure.
+
+User Text : {user_text}
+
+Style Guide : {style_guide}
+
+Return only the JSON in answer.
+
+Answer :
+"""
+
+style_to_answer_prompt = r"""
+You are a helpful educational assistant.
+Your task is to answer user questions laconically and using the mentioned style.
+Keep your answer limited to 5 lines only.
+
+Question : {question}.
+
+Style : Frame your answer using the following style guide {style}.
+
+Answer :
+"""
+
+
+
+
