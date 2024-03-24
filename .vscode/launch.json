@@ -8,7 +8,7 @@
             "program": "C:\\Users\\abhib\\Anaconda3\\envs\\nd-empowerment\\Lib\\site-packages\\streamlit",  // /home/xx/tmp/venv/bin/streamlit",
             "args": [
                 "run",
-                "frontend\\main.py"
+                "frontend\\chatbot.py"
             ]
         }
     ]
