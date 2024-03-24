@@ -18,7 +18,7 @@ def post_question_api(data):
     # write the data to an existing json file in the backend
 # read the data from an existing json file in the backend
     
-    with open('psychometry_output.json') as f:
+    with open('C:\\Apps\\nd-empowerment\\frontend\\psychometry_output.json') as f:
         #try:
         updated_data = json.load(f)
         # except json.JSONDecodeError:  # If the file is empty, set updated_data as an empty list
@@ -28,11 +28,11 @@ def post_question_api(data):
     updated_data.append(data)  # make sure 'data' is a dictionary
 
     # write the updated data back to the json file
-    with open('psychometry_output.json', 'w') as f:
+    with open('C:\\Apps\\nd-empowerment\\frontend\\psychometry_output.json', 'w') as f:
         json.dump(updated_data, f)
 
     # read the data from another json file
-    with open('psycometry.json') as f:
+    with open('C:\\Apps\\nd-empowerment\\frontend\\psycometry.json') as f:
         new_data = json.load(f)
     # print(updated_data)
     # print(new_data)
@@ -73,7 +73,7 @@ def post_question_api(data):
     return return_data
 
 # Main Streamlit app
-def main():
+def psychometry_page():
     # Function to render options
     def render_options(question, question_type, done, option_list, image_folder):
         for option in option_list:
@@ -131,7 +131,7 @@ def main():
                 render_welcome_page()
 
     # Define the folder path where images are located
-    image_folder = "images"
+    image_folder = "C:\\Apps\\nd-empowerment\\frontend\\images"
 
     # Render appropriate page based on input data
     data = st.session_state.get("question_data")
@@ -141,5 +141,5 @@ def main():
         handle_questionnaire(post_question_api({"Like": [], "Dislike": [], "Done": False}), image_folder)
 
 # Run the app
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
