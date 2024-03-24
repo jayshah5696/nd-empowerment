@@ -1,0 +1,15 @@
+{"answer_type": ["story", 
+                "example", 
+                "analogy", 
+                "visual",
+                "poem"
+                ],
+"answer_style": ["creative", 
+                "logical", 
+                "encouraging",
+                "inspirational",
+                "aesthetic",
+                "analytical",
+                "innovative"
+                ],
+"negative_type": ["none"]}

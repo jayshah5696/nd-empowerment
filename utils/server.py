@@ -7,7 +7,7 @@ import bentoml
 import dotenv
 import json
 from image_gen import generate_image
-
+from llm import completion_llm
 # Load the .env file
 dotenv.load_dotenv('.env')
 
@@ -31,7 +31,16 @@ def explain():
     tts_api = os.getenv('tts_id')
     data = request.form
     print('Called READ, sending to Synthesize output')
-    input_data = SynthesizeInput(lang='en', text=data['text'])
+    with open('style_guide.json') as f:
+        style_guide = json.load(f)
+    text = data['text']
+    prompt =f"""
+    Your goal is to using the following style guide explain the following text in a way that is easy to understand in 2-3 sentences.
+    Style Guide: {style_guide}
+    Text: {text} 
+    """
+    response = completion_llm(prompt)
+    input_data = SynthesizeInput(lang='en', text=response)
     print('Got Synthesize output')
     result = synthesize_text(input_data)
     print('Synthesize output: ' + result.result)
