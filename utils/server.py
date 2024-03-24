@@ -53,7 +53,10 @@ def explain():
 def visualize():
     print('Received input:', request.json)
     text = request.json.get('text', '')
-    path = generateImage(text)
+    input_prompt = f"Given this input:`{text}`, craft a prompt for an image generator to best create an image which best conveys the spirit of the text. Ensure that this image is being generated for a dyslexic person. So think about creating a prompt which will best help generate an image to help them."
+    gen_prompt = completion_llm(input_prompt);
+    print('Received prompt:', gen_prompt)
+    path = generateImage(gen_prompt)
     return "file://" + path
 
 #############
