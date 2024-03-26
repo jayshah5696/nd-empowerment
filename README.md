@@ -34,6 +34,11 @@ It's difficult to learn as it is, dyslexia is also a spectrum, so personalized l
 # What's next for NeuroBuddy
 We look to deploy it and get more feedback and evolve the platform! We also plan to integrate feedback mechanisms in the bot which would help users revise the topics they have read in the session on a timely manner and send the materials they learnt through chatbot as emails/pdf for their future reference so they can link how they actually learnt the topic whenever they refer to the pdf.
 
+# Architecture Overview
+
+![Diagram displaying the interconnected parts across multiple layers.](arch-neurobuddy.png
+ "Architecture Overview")
+
 # Built With
 - mistral
 - groq
