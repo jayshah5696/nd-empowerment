@@ -1,6 +1,9 @@
 # nd-empowerment
 Supporting NeuroDiversity Month
 
+# Demo
+[![NeuroBuddy Demo](https://i.vimeocdn.com/video/1821436191-4b05ac822394ce707338ad0170e07db1c29cc4dc4d1bdc952e8f07ca5f94ea8c-d_260x146)](https://vimeo.com/926887646?share=copy)
+
 # Inspiration
 Dyslexia is extremely common, 1 in 10 people are affected by it across the world. The outcomes are very isolating. It affects learning, social interactions, mood and overall life. Leading what is considered a 'normal' life can be difficult. Dyslexic individuals often benefit from personalized tutoring and care. Unfortunately, such care is not available at an affordable price and is out of reach for a majority. On the eve of neurodiversity appreciation month, we wanted to do our part by leveraging AI to democratize this personalized learning approach to anyone who needs it.
 
